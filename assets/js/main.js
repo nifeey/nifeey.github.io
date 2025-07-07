@@ -64,6 +64,7 @@ const sendEmail = (e) => {
     }
 
     contactForm.addEventListener('submit', sendEmail); 
+    
 /*=============== SHOW SCROLL UP ===============*/ 
 const scrollUp = () =>{
     const scrollUp = document.getElementById('scroll-up')

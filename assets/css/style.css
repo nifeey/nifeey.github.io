@@ -310,6 +310,7 @@ svg {
 
 .home_social-link:hover {
     transform: translateY(-.25rem);
+    background-color: var(--first-color);
 }
 
 .home_image {
@@ -327,13 +328,16 @@ svg {
     background-color: var(--first-color);
     padding: 1rem 1.75rem;
     border-radius: .5rem;
+    cursor: pointer;
     color: var(--title-color);
     font-weight: var(--font-medium);
-    transition: box-shadow .4s;
+    transition: box-shadow .4s,
+                background-color .3s ease;
 }
 
 .button:hover {
     box-shadow: 0 8px 24px hsla(var(--hue), 100%, 40%, .25);
+    background-color: var(--first-color-alt);
 }
 
 /*=============== ABOUT ===============*/
@@ -490,7 +494,7 @@ svg {
   min-width: 40px;
   height: 40px;
   background-color: var(--first-color);
-  color: #fff;
+  color: var(--title-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -499,6 +503,13 @@ svg {
   font-size: 1.25rem;
   position: relative;
   z-index: 2;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+.experience_item:hover .experience_icon {
+  background-color: var(--first-color-alt);
+  color: var(--title-color);
+  transform: scale(1.1) rotate(-12deg);
 }
 
 .experience_item::before {
@@ -565,24 +576,36 @@ svg {
 
 .projects_img {
   width: 100%;
-  height: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
 }
 
 .projects_modal {
   position: absolute;
   left: 0;
-  bottom: -100;
+  bottom: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, hsla(0, 0%, 0%, 0.7) 0%, hsla(var(--hue), 50%, 40%, 0.95) 120%);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: linear-gradient(180deg, hsla(0, 0%, 0%, 0.7) 0%, hsla(var(--hue), 85%, 38%, 0.97) 120%);
+  backdrop-filter: blur(8px) brightness(1.08);
+  -webkit-backdrop-filter: blur(8px) brightness(1.08);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: bottom .4s;
+  opacity: 0;
+  pointer-events: none;
+  transition: 
+    bottom 0.6s cubic-bezier(0.77, 0, 0.175, 1),
+    opacity 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.projects_card:hover .projects_modal {
+  bottom: 0;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .project_subtitle,
@@ -615,50 +638,80 @@ svg {
   bottom: 0;
 }
 
-/*=============== CONTACT ===============*/
 .contact_container {
-  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
 }
 
-.contact_group,
 .contact_form {
+  width: 100%;
+  max-width: 700px;
+  background-color: var(--container-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
   display: grid;
-  row-gap: 1rem;
+  gap: 1.5rem;
 }
 
-.contact_form {
-  position: relative;
+.contact_group {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form_field {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact_label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--title-color);
 }
 
 .contact_input {
-  padding: 1rem 1.25rem;
-  border-radius: .5rem;
-  background-color: var(--container-color);
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--container-color);
+  background-color: var(--body-color);
   color: var(--title-color);
+  transition: border-color 0.3s;
 }
 
-.contact_input ::placeholder {
+.contact_input:hover {
+  border-color: var(--first-color);
+}
+
+
+.contact_input::placeholder {
   color: var(--text-color);
+  opacity: 0.8;
 }
 
-.contact_form textarea {
-  height: 11rem;
-  resize: none;
-  margin-bottom: 2rem;
+.contact_input:focus {
+  border-color: var(--first-color-alt);
+  outline: none;
 }
 
-.contact_button {
-  justify-self: center;
-  cursor: pointer;
+.textarea.contact_input {
+  min-height: 10rem;
+  resize: vertical;
 }
 
 .contact_message {
-  position: absolute;
-  left: 0;
-  bottom:  4.5rem;
   font-size: var(--small-font-size);
-  color: var(--title-color);
+  color: var(--first-color);
+  text-align: center;
 }
+
+.contact_button {
+  padding: 0.75rem 2rem;
+  justify-self: center;
+}
+
 
 
 /*=============== FOOTER ===============*/
@@ -704,6 +757,7 @@ svg {
 
 .footer_social-link:hover {
   transform: translateY(-.25rem);
+  background-color: var(--first-color);
 }
 
 .footer_copy {
@@ -832,6 +886,12 @@ svg {
   .projects_container {
     grid-template-columns: repeat(2, 352px);
   }
+
+  .contact_group {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
 }
 
 /* For large devices */
