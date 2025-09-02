@@ -555,6 +555,11 @@ svg {
   line-height: 1.6;
 }
 
+.experience_cv {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
 
 
 /*=============== PROJECTS ===============*/
